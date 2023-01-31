@@ -1,0 +1,50 @@
+.card {
+	display: grid;
+	grid-template-columns: 35% 1fr;
+	grid-template-rows: 8% 1fr 1fr 1fr;
+	grid-template-areas:
+		'header-left header-right'
+		'content-left-top content-right'
+		'content-left-bottom content-right'
+		'content-left-bottom content-right';
+	grid-gap: 1rem;
+	padding: 2rem 4rem;
+	min-height: 32rem;
+	background-color: #fff;
+	border-radius: 3rem;
+	box-shadow: 0px 0.25rem 0.25rem #00000040;
+	margin: 2rem;
+}
+
+.topic {
+	grid-area: header-left;
+	font-size: x-large;
+	text-transform: capitalize;
+}
+
+.date {
+	grid-area: header-right;
+	justify-self: flex-end;
+	font-size: x-large;
+}
+
+.codeSnippet {
+	grid-area: content-left-top;
+	margin: 0;
+}
+
+.description {
+	grid-area: content-left-bottom;
+	font-size: large;
+}
+
+.demoLink {
+	grid-area: content-right;
+}
+
+@media screen and (max-width: 540px) {
+	.card {
+		display: flex;
+		flex-direction: column;
+	}
+}

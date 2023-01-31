@@ -1,0 +1,12 @@
+.footer {
+	margin: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: larger;
+}
+
+.heart {
+	color: #ff4057;
+	margin-left: 0.25rem;
+}
