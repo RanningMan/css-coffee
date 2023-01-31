@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 export default function Document() {
 	return (
@@ -12,7 +13,7 @@ export default function Document() {
 				<link href='prism.css' rel='stylesheet' />
 				<link
 					rel='stylesheet'
-					href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0'
+					href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0&display=optional'
 				/>
 				<link rel='preconnect' href='https://fonts.googleapis.com' />
 				<link
@@ -28,7 +29,7 @@ export default function Document() {
 			<body>
 				<Main />
 				<NextScript />
-				<script src='prism.js' data-manual></script>
+				<Script src='prism.js' data-manual></Script>
 			</body>
 		</Html>
 	);
