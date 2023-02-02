@@ -1,5 +1,3 @@
-import { GetServerSidePropsContext } from 'next';
-
 import styles from 'styles/Home.module.css';
 import ContentContainer from 'components/ContentContainer/ContentContainer';
 import Hero from 'components/Hero/Hero';
