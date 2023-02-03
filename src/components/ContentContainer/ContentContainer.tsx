@@ -4,23 +4,25 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Card from 'components/Card/Card';
 import { Post } from 'components/components.interface';
 import styles from './ContentContainer.module.css';
-import { getDaysAgo } from 'utils/getDates';
 import configs from 'utils/config';
 
 export interface ContentContainerProps {
 	posts: Post[];
+	locale: String;
 }
 
 export default function ContentContainer({
 	posts: data,
+	locale,
 }: ContentContainerProps) {
 	const [posts, setPosts] = useState([...data]);
 	const [hasMore, setHasMore] = useState(true);
 	const fetchData = async () => {
 		const res = await fetch(
-			`${configs.endpoint}/api/posts?start=${posts.length}&limit=5`
+			`${configs.endpoint}/api/posts?start=${posts.length}&limit=5&locale=${locale}`
 		);
-		const morePosts: Post[] = (await res.json())['content'];
+		const data = await res.json();
+		const morePosts: Post[] = data['content'];
 		setPosts([...posts, ...morePosts]);
 		setHasMore(() => morePosts.length > 0);
 	};
@@ -33,7 +35,11 @@ export default function ContentContainer({
 				loader={<h4>Loading...</h4>}
 				endMessage={
 					<p style={{ textAlign: 'center' }}>
-						<b>Yay! You have seen it all</b>
+						{locale === 'en-US' ? (
+							<b>Yay! You have seen it all</b>
+						) : (
+							<b>棒！你看完了全部内容</b>
+						)}
 					</p>
 				}
 			>

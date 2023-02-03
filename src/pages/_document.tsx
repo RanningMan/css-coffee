@@ -9,7 +9,7 @@ export default function Document() {
 					name='description'
 					content='Learn a little bit of css every day'
 				/>
-				<link rel='icon' href='/favicon.ico' />
+				<link rel='icon' href='favicon.ico' />
 				<link href='prism.css' rel='stylesheet' />
 				<link
 					rel='stylesheet'

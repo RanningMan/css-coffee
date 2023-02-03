@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from 'next';
 import styles from 'styles/Home.module.css';
 import ContentContainer from 'components/ContentContainer/ContentContainer';
 import Hero from 'components/Hero/Hero';
@@ -7,11 +8,16 @@ import configs from 'utils/config';
 
 interface HomeProps {
 	posts: Post[];
+	locale: string;
 }
 
-export async function getServerSideProps() {
-	const res = await fetch(`${configs.endpoint}/api/posts?start=0&limit=5`);
-	const posts: Post[] = (await res.json())['content'];
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	const locale = context.locale || 'en-US';
+	const res = await fetch(
+		`${configs.endpoint}/api/posts?start=0&limit=5&locale=${locale}`
+	);
+	const data = await res.json();
+	const posts: Post[] = data['content'];
 
 	// sort by date
 	// filter out posts with date later than today
@@ -28,17 +34,18 @@ export async function getServerSideProps() {
 	return {
 		props: {
 			posts: sortedPosts,
+			locale,
 		},
 	};
 }
 
-export default function Home({ posts }: HomeProps) {
+export default function Home({ posts, locale }: HomeProps) {
 	return (
 		<>
 			<main className={styles.main}>
-				<Hero />
-				<ContentContainer posts={posts} />
-				<Footer />
+				<Hero locale={locale} />
+				<ContentContainer posts={posts} locale={locale} />
+				<Footer locale={locale} />
 			</main>
 		</>
 	);

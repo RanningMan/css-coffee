@@ -27,24 +27,22 @@ function getYear(current: Date) {
 	return `${current.getFullYear()}`;
 }
 
-export default function getPosts(from: Date, to: Date) {
+export default function getPosts(from: Date, to: Date, locale: string) {
 	let posts: Post[] = [];
 	let current: Date = from;
 	while (current <= to) {
 		const id = `${getYear(current)}-${getMonth(current)}-${getDate(
 			current
 		)}`;
-		const fileName = `${id}.md`;
-		// Read markdown file as string
-		const fullPath = path.join(postsDirectory, fileName);
-		const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-		// Use gray-matter to parse the post metadata section
-		const matterResult = matter(fileContents);
-		posts.push({
-			id,
-			...matterResult.data,
-		} as Post);
+		const fullPath = path.join(path.join(postsDirectory, locale), `${id}.md`);
+		if(fs.existsSync(fullPath)) {
+			const fileContents = fs.readFileSync(fullPath, 'utf8');
+			const matterResult = matter(fileContents);
+			posts.push({
+				id,
+				...matterResult.data,
+			} as Post);
+		}
 		current.setDate(current.getDate() + 1);
 	}
 	return posts;

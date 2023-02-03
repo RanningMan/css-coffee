@@ -16,11 +16,13 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const {start, limit} = req.query;
+    const {start, limit, locale} = req.query;
     if(req.method !== 'GET') {
         res.status(404).json({error: 'Not Implemented!'});
     }
-    if(!start || Array.isArray(start)) {
+    if(!locale || Array.isArray(locale)) {
+        res.status(404).json({error: 'Invalid query param!'});
+    } else if(!start || Array.isArray(start)) {
         res.status(404).json({error: 'Invalid query param!'});
     } else if(!limit || Array.isArray(limit)) {
         res.status(404).json({error: 'Invalid query param!'});
@@ -33,7 +35,7 @@ export default function handler(
         if(startDay < theFirstPost) {
             startDay = theFirstPost;
         }
-        const posts = getPosts(startDay, endDay);
+        const posts = getPosts(startDay, endDay, locale);
         res.status(200).json({ content: posts });
     }
 }

@@ -1,8 +1,43 @@
 .hero {
 	box-sizing: border-box;
-	background-color: #282634;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 100%;
-	height: 40vh;
+	height: 50vh;
+	background-color: #282634;
+	min-height: 20rem;
+}
+
+.heroImage {
+	width: 100%;
+	height: 90%;
 	position: relative;
 	min-height: 15rem;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.button {
+	box-sizing: border-box;
+	height: 3rem;
+	border: 0.25rem solid #dcdcdc;
+	border-radius: 0.5rem;
+	margin: 2rem;
+	padding: 0.5rem 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 0.25rem;
+	color: #dcdcdc;
+	cursor: pointer;
+}
+
+.button:hover {
+	color: #ff4057;
+	background-color: #dcdcdc;
+	transform: scale(1.1);
 }

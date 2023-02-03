@@ -20,13 +20,6 @@ export default function Demo({
 			src={demoLink}
 			loading='lazy'
 			allowFullScreen={true}
-		>
-			{/* See the Pen <a href={demoLink}>{title}</a> by {author || 'Ran Xia'}(
-			<a href={authorCodePenPage || 'https://codepen.io/ranningman'}>
-				@{authorNickName || 'ranningman'}
-			</a>
-			) on <a href='https://codepen.io'>CodePen</a>.
-			See the Pen by Ran Xia(@ranningman) on. */}
-		</iframe>
+		></iframe>
 	);
 }
