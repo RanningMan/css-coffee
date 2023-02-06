@@ -8,11 +8,9 @@ type Data = {
   error?: string;
 }
 
-const theFirstPost = new Date(2023, 0, 20);
-
-// GET posts?start=${startday}&limit={number}
+// GET posts?start=${startday}&limit={number}&locale={locale}
 // today start is 0
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
@@ -32,10 +30,7 @@ export default function handler(
         let limitInt = parseInt(limit);
         let endDay = getDaysAgo(startInt);
         let startDay = getDaysAgo(startInt + limitInt);
-        if(startDay < theFirstPost) {
-            startDay = theFirstPost;
-        }
-        const posts = getPosts(startDay, endDay, locale);
+        const posts = await getPosts(startDay, endDay, locale);
         res.status(200).json({ content: posts });
     }
 }

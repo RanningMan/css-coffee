@@ -21,15 +21,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 	// sort by date
 	// filter out posts with date later than today
-	const sortedPosts = posts
-		.sort((a, b) => {
-			if (a.date < b.date) {
-				return 1;
-			} else {
-				return -1;
-			}
-		})
-		.filter((post) => new Date(post.date) <= new Date());
+	const sortedPosts = posts.sort((a, b) => {
+		if (a.date <= b.date) {
+			return 1;
+		} else {
+			return -1;
+		}
+	});
 
 	return {
 		props: {

@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 import { Post } from 'components/components.interface';
 
 const postsDirectory = path.join(process.cwd(), 'content');
@@ -27,7 +29,7 @@ function getYear(current: Date) {
 	return `${current.getFullYear()}`;
 }
 
-export default function getPosts(from: Date, to: Date, locale: string) {
+export default async function getPosts(from: Date, to: Date, locale: string) {
 	let posts: Post[] = [];
 	let current: Date = from;
 	while (current <= to) {
@@ -38,8 +40,11 @@ export default function getPosts(from: Date, to: Date, locale: string) {
 		if(fs.existsSync(fullPath)) {
 			const fileContents = fs.readFileSync(fullPath, 'utf8');
 			const matterResult = matter(fileContents);
+			const processedContent = await remark().use(html).process(matterResult.content);
+  			const contentHtml = processedContent.toString();
 			posts.push({
 				id,
+				description: contentHtml,
 				...matterResult.data,
 			} as Post);
 		}

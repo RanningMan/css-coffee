@@ -14,7 +14,10 @@ export default function Card({ post }: CardProp) {
 			<pre className={`language-css ${styles.codeSnippet}`}>
 				<code className='language-css'>{post.codeSnippet}</code>
 			</pre>
-			<div className={styles.description}>{post.description}</div>
+			<div
+				className={styles.description}
+				dangerouslySetInnerHTML={{ __html: post.description }}
+			></div>
 			<div className={styles.demoLink}>
 				<Demo title={post.demoTitle} demoLink={post.demoLink} />
 			</div>
