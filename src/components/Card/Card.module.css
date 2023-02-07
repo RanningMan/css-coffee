@@ -17,6 +17,14 @@
 	cursor: pointer;
 }
 
+.lg {
+	height: 32rem;
+}
+
+.sm {
+	height: 24rem;
+}
+
 .topic {
 	grid-area: header-left;
 	font-size: x-large;

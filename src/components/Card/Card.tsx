@@ -4,11 +4,16 @@ import Demo from './Demo';
 
 interface CardProp {
 	post: Post;
+	size?: 'lg' | 'sm';
 }
 
-export default function Card({ post }: CardProp) {
+export default function Card({ post, size }: CardProp) {
 	return (
-		<div className={styles.card}>
+		<div
+			className={`${styles.card} ${
+				size !== 'sm' ? styles.lg : styles.sm
+			}`}
+		>
 			<div className={styles.topic}>{post.topic}</div>
 			<div className={styles.date}>{post.date}</div>
 			<pre className={`language-css ${styles.codeSnippet}`}>

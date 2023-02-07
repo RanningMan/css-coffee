@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Card from 'components/Card/Card';
@@ -11,27 +11,60 @@ export interface ContentContainerProps {
 	locale: String;
 }
 
+function ScrollToTopButton() {
+	const onBackToTopClick = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	};
+	return (
+		<button className={styles.backToTopButton} onClick={onBackToTopClick}>
+			<span className={`material-symbols-outlined ${styles.custom}`}>
+				keyboard_double_arrow_up
+			</span>
+		</button>
+	);
+}
+
 export default function ContentContainer({
 	posts: data,
 	locale,
 }: ContentContainerProps) {
 	const [posts, setPosts] = useState([...data]);
 	const [hasMore, setHasMore] = useState(true);
+	const [showScrollToTop, setShowScrollToTop] = useState(false);
 	const fetchData = async () => {
 		const res = await fetch(
 			`${configs.endpoint}/api/posts?start=${posts.length}&limit=5&locale=${locale}`
 		);
 		const data = await res.json();
 		const morePosts: Post[] = data['content'];
-		setPosts([...posts, ...morePosts]);
+		setPosts(
+			[...posts, ...morePosts].sort((a, b) => {
+				if (a.date <= b.date) {
+					return 1;
+				} else {
+					return -1;
+				}
+			})
+		);
 		setHasMore(() => morePosts.length > 0);
 	};
 	return (
 		<div className={styles.container}>
+			{showScrollToTop && <ScrollToTopButton />}
 			<InfiniteScroll
 				dataLength={posts.length} //This is important field to render the next data
 				next={fetchData}
 				hasMore={hasMore}
+				onScroll={() => {
+					if (window.scrollY <= 1024) {
+						setShowScrollToTop(false);
+					} else {
+						setShowScrollToTop(true);
+					}
+				}}
 				loader={<h4>Loading...</h4>}
 				endMessage={
 					<p style={{ textAlign: 'center' }}>

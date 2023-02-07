@@ -3,10 +3,37 @@
 	min-height: 55vh;
 }
 
+.backToTopButton {
+	display: none;
+}
+
 @media screen and (min-width: 821px) {
 	.container {
 		width: 100%;
 		min-height: 55vh;
 		padding: 0 10% 2rem;
+	}
+
+	.backToTopButton {
+		display: block;
+		position: fixed;
+		bottom: 10%;
+		right: 2.5%;
+		cursor: pointer;
+		width: 5rem;
+		height: 4rem;
+		border: none;
+		border-radius: 0.25rem;
+		background-color: #282634;
+		color: #ff4057;
+	}
+
+	.custom:hover {
+		transform: scale(1.2);
+		transition: transform 0.2s ease-in-out;
+	}
+
+	.custom {
+		font-size: 3rem;
 	}
 }
