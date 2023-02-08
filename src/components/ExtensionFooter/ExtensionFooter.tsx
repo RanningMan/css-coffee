@@ -11,7 +11,7 @@ export default function ExtensionFooter({ locale }: HeaderProps) {
 			{locale === 'en-US'
 				? 'Check out past CSS coffee from '
 				: '查看更多'}
-			<a href={configs.endpoint} target='_blank'>
+			<a href={configs.endpoint} target='_blank' rel='noopener'>
 				{configs.endpoint}
 			</a>
 		</div>
