@@ -10,8 +10,10 @@ export default function ExtensionHeader({ locale }: HeaderProps) {
 		<div className={styles.header}>
 			<Image
 				className={styles.img}
-				src='./css-coffee.png'
+				src='/css-coffee.png'
 				alt='css coffee logo'
+				width={24}
+				height={24}
 			></Image>
 			<h1 className={styles.title}>
 				{locale === 'en-US'

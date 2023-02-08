@@ -14,7 +14,7 @@ interface HomeProps {
 export async function getServerSideProps(context: GetServerSidePropsContext) {
 	const locale = context.locale || 'en-US';
 	const res = await fetch(
-		`${configs.endpoint}/api/posts?start=0&limit=5&locale=${locale}`
+		`${configs.endpoint}/api/posts?start=0&limit=2&locale=${locale}`
 	);
 	const data = await res.json();
 	const posts: Post[] = data['content'];
