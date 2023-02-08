@@ -1,5 +1,5 @@
 const configs = {
-    endpoint: 'https://css-coffee.vercel.app'
+    endpoint: 'https://csscoffee.dev'
 };
 
 export default configs;

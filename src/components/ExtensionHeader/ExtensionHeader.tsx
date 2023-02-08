@@ -1,4 +1,5 @@
 import styles from './ExtensionHeader.module.css';
+import Image from 'next/image';
 
 interface HeaderProps {
 	locale: String;
@@ -7,11 +8,11 @@ interface HeaderProps {
 export default function ExtensionHeader({ locale }: HeaderProps) {
 	return (
 		<div className={styles.header}>
-			<img
+			<Image
 				className={styles.img}
 				src='./css-coffee.png'
 				alt='css coffee logo'
-			></img>
+			></Image>
 			<h1 className={styles.title}>
 				{locale === 'en-US'
 					? 'Your CSS Coffee For Today is Ready!'
