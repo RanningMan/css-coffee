@@ -28,6 +28,18 @@
 		color: #ff4057;
 	}
 
+	.show {
+		visibility: visible;
+		opacity: 1;
+		animation: 0.5s ease-in-out fadein;
+	}
+
+	.hidden {
+		visibility: 0;
+		opacity: 0;
+		animation: 0.5s ease-in-out fadeout;
+	}
+
 	.custom:hover {
 		transform: scale(1.2);
 		transition: transform 0.2s ease-in-out;
@@ -35,5 +47,23 @@
 
 	.custom {
 		font-size: 3rem !important;
+	}
+}
+
+@keyframes fadein {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeout {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
 	}
 }

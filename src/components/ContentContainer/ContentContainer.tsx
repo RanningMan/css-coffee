@@ -11,7 +11,11 @@ export interface ContentContainerProps {
 	locale: String;
 }
 
-function ScrollToTopButton() {
+interface ScrollToTopButtonProps {
+	show: boolean;
+}
+
+function ScrollToTopButton({ show }: ScrollToTopButtonProps) {
 	const onBackToTopClick = () => {
 		window.scrollTo({
 			top: 0,
@@ -19,7 +23,12 @@ function ScrollToTopButton() {
 		});
 	};
 	return (
-		<button className={styles.backToTopButton} onClick={onBackToTopClick}>
+		<button
+			className={`${styles.backToTopButton} ${
+				show ? styles.show : styles.hidden
+			}`}
+			onClick={onBackToTopClick}
+		>
 			<span className={`material-symbols-outlined ${styles.custom}`}>
 				keyboard_double_arrow_up
 			</span>
@@ -41,19 +50,23 @@ export default function ContentContainer({
 		const data = await res.json();
 		const morePosts: Post[] = data['content'];
 		setPosts(
-			[...posts, ...morePosts].sort((a, b) => {
-				if (a.date <= b.date) {
-					return 1;
-				} else {
-					return -1;
-				}
-			})
+			Array.from(
+				new Set(
+					[...posts, ...morePosts].sort((a, b) => {
+						if (a.date <= b.date) {
+							return 1;
+						} else {
+							return -1;
+						}
+					})
+				)
+			)
 		);
 		setHasMore(() => morePosts.length > 0);
 	};
 	return (
 		<div className={styles.container}>
-			{showScrollToTop && <ScrollToTopButton />}
+			<ScrollToTopButton show={showScrollToTop} />
 			<InfiniteScroll
 				dataLength={posts.length} //This is important field to render the next data
 				next={fetchData}
