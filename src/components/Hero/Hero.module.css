@@ -16,18 +16,21 @@
 	min-height: 15rem;
 }
 
-.buttons {
+.buttonList {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
+	margin: 2rem;
 }
 
 .button {
 	box-sizing: border-box;
 	height: 3rem;
+	width: 12rem;
 	border: 0.25rem solid #dcdcdc;
 	border-radius: 0.5rem;
-	margin: 2rem;
-	padding: 0.5rem 1rem;
+	padding: 0.5rem auto;
+	margin: 0.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -40,4 +43,10 @@
 	color: #ff4057;
 	background-color: #dcdcdc;
 	transform: scale(1.1);
+}
+
+@media screen and (max-width: 820px) {
+	.hero {
+		height: 100%;
+	}
 }
