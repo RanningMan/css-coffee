@@ -50,17 +50,13 @@ export default function ContentContainer({
 		const data = await res.json();
 		const morePosts: Post[] = data['content'];
 		setPosts(
-			Array.from(
-				new Set(
-					[...posts, ...morePosts].sort((a, b) => {
-						if (a.date <= b.date) {
-							return 1;
-						} else {
-							return -1;
-						}
-					})
-				)
-			)
+			Array.from(new Set([...posts, ...morePosts])).sort((a, b) => {
+				if (a.order <= b.order) {
+					return 1;
+				} else {
+					return -1;
+				}
+			})
 		);
 		setHasMore(() => morePosts.length > 0);
 	};

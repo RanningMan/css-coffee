@@ -15,7 +15,6 @@ export default function Card({ post, size }: CardProp) {
 			}`}
 		>
 			<div className={styles.topic}>{post.topic}</div>
-			<div className={styles.date}>{post.date}</div>
 			<pre className={`language-css ${styles.codeSnippet}`}>
 				<code className='language-css'>{post.codeSnippet}</code>
 			</pre>

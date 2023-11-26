@@ -7,48 +7,38 @@ import { Post } from 'components/components.interface';
 
 const postsDirectory = path.join(process.cwd(), 'content');
 
-function getMonth(current: Date) {
-	let month = current.getMonth() + 1;
-	if (month < 10) {
-		return `0${month}`;
-	} else {
-		return `${month}`;
-	}
-}
-
-function getDate(current: Date) {
-	let date = current.getDate();
-	if (date < 10) {
-		return `0${date}`;
-	} else {
-		return `${date}`;
-	}
-}
-
-function getYear(current: Date) {
-	return `${current.getFullYear()}`;
-}
-
-export default async function getPosts(from: Date, to: Date, locale: string) {
+export default async function getPosts(
+	from: number,
+	to: number,
+	locale: string
+) {
+	const contentLength = fs.readdirSync(
+		path.join(postsDirectory, locale)
+	).length;
 	let posts: Post[] = [];
-	let current: Date = from;
-	while (current <= to) {
-		const id = `${getYear(current)}-${getMonth(current)}-${getDate(
-			current
-		)}`;
-		const fullPath = path.join(path.join(postsDirectory, locale), `${id}.md`);
-		if(fs.existsSync(fullPath)) {
+	let current: number = contentLength - to;
+	while (current <= contentLength - from) {
+		const id = `${current}`;
+		const fullPath = path.join(
+			path.join(postsDirectory, locale),
+			`${id}.md`
+		);
+		if (fs.existsSync(fullPath)) {
 			const fileContents = fs.readFileSync(fullPath, 'utf8');
 			const matterResult = matter(fileContents);
-			const processedContent = await remark().use(html).process(matterResult.content);
-  			const contentHtml = processedContent.toString();
+			const processedContent = await remark()
+				.use(html)
+				.process(matterResult.content);
+			const order = parseInt(matterResult.data.order);
+			const contentHtml = processedContent.toString();
 			posts.push({
 				id,
 				description: contentHtml,
 				...matterResult.data,
+				order,
 			} as Post);
 		}
-		current.setDate(current.getDate() + 1);
+		current++;
 	}
 	return posts;
 }

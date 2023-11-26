@@ -19,10 +19,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 	const data = await res.json();
 	const posts: Post[] = data['content'];
 
-	// sort by date
-	// filter out posts with date later than today
+	// sort by order
 	const sortedPosts = posts.sort((a, b) => {
-		if (a.date <= b.date) {
+		if (a.order <= b.order) {
 			return 1;
 		} else {
 			return -1;
