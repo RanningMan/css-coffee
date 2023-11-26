@@ -19,7 +19,7 @@ export default async function handler(
 	if (!locale || Array.isArray(locale)) {
 		res.status(404).json({ error: 'Invalid query param!' });
 	} else {
-		const posts = await getPosts(new Date(), new Date(), locale);
+		const posts = await getPosts(0, 0, locale);
 		if (posts.length !== 1) {
 			res.status(500).json({ error: 'Something went wrong!' });
 		}
