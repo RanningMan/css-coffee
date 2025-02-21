@@ -1,0 +1,11 @@
+{
+  "name": "css-coffee",
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "domains": ["csscoffee.dev"]
+}
