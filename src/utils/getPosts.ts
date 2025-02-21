@@ -15,9 +15,12 @@ export default async function getPosts(
   const contentLength = fs.readdirSync(
     path.join(postsDirectory, locale)
   ).length;
+  if (to > contentLength) {
+    return [];
+  }
   let posts: Post[] = [];
-  let current: number = Math.max(1, contentLength - to);
-  while (current <= contentLength - from) {
+  let current: number = from;
+  while (current <= to) {
     const id = `${current}`;
     const fullPath = path.join(path.join(postsDirectory, locale), `${id}.md`);
     if (fs.existsSync(fullPath)) {
