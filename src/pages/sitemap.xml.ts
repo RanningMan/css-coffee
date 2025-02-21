@@ -25,19 +25,29 @@ const generateSitemap = (
 </urlset>`;
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const contentDir = path.join(process.cwd(), "content", "en-US");
-  const files = fs.readdirSync(contentDir);
-  const posts = files.map((file) => file.replace(".md", ""));
-
+  // Set proper XML content type
   res.setHeader("Content-Type", "text/xml");
-  res.write(generateSitemap(posts));
-  res.end();
+
+  try {
+    const contentDir = path.join(process.cwd(), "content", "en-US");
+    const files = fs.readdirSync(contentDir);
+    const posts = files.map((file) => file.replace(".md", ""));
+
+    // Generate and write sitemap
+    res.write(generateSitemap(posts));
+    res.end();
+  } catch (error) {
+    console.error("Error generating sitemap:", error);
+    res.write(generateSitemap([]));
+    res.end();
+  }
 
   return {
     props: {},
   };
 };
 
+// Required default export
 export default function Sitemap() {
   return null;
 }
