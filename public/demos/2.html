@@ -14,9 +14,8 @@
     
     /* Layout */
     .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      display: flex;
+      justify-content: space-between;
       padding: 20px;
       box-sizing: border-box;
       max-height: 100vh;
@@ -24,6 +23,7 @@
     
     /* Code panel */
     .code-panel {
+      width: 40%;
       border: 1px solid #eee;
       border-radius: 4px;
       overflow: hidden;
@@ -72,15 +72,22 @@
     
     /* Demo panel */
     .demo-panel {
+      width: 50%;
       border: 1px solid #eee;
       border-radius: 4px;
       padding: 20px;
-      height: calc(100vh - 40px);
       overflow: auto;
     }
 
     /* Custom demo styles */
-    .container { display: flex; flex-wrap: wrap; align-content: space-around; } .item { width: 100px; height: 100px; }
+    .flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.item {
+  flex: 1 0 100px;
+}
   </style>
   <script>
     function updatePreview() {
@@ -148,16 +155,38 @@
         <button id="css-tab" class="tab active" onclick="switchTab('css')">CSS</button>
         <button id="js-tab" class="tab" onclick="switchTab('js')">JavaScript</button>
       </div>
-      <textarea id="html-code" class="code-content" spellcheck="false">&lt;div class=&#039;container&#039;&gt;&lt;div class=&#039;item&#039;&gt;Item 1&lt;/div&gt;&lt;div class=&#039;item&#039;&gt;Item 2&lt;/div&gt;&lt;div class=&#039;item&#039;&gt;Item 3&lt;/div&gt;&lt;/div&gt;</textarea>
-      <textarea id="css-code" class="code-content active" spellcheck="false">.container { display: flex; flex-wrap: wrap; align-content: space-around; } .item { width: 100px; height: 100px; }</textarea>
+      <textarea id="html-code" class="code-content" spellcheck="false">&lt;div class=&#039;flex-container&#039;&gt;
+  &lt;div class=&#039;item&#039;&gt;Item 1&lt;/div&gt;
+  &lt;div class=&#039;item&#039;&gt;Item 2&lt;/div&gt;
+  &lt;div class=&#039;item&#039;&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</textarea>
+      <textarea id="css-code" class="code-content active" spellcheck="false">.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.item {
+  flex: 1 0 100px;
+}</textarea>
       <textarea id="js-code" class="code-content" spellcheck="false">// No JavaScript required for this demo</textarea>
     </div>
     <div class="demo-panel">
       <style id="demo-style">
-        .container { display: flex; flex-wrap: wrap; align-content: space-around; } .item { width: 100px; height: 100px; }
+        .flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.item {
+  flex: 1 0 100px;
+}
       </style>
       <div id="demo-preview">
-        <div class='container'><div class='item'>Item 1</div><div class='item'>Item 2</div><div class='item'>Item 3</div></div>
+        <div class='flex-container'>
+  <div class='item'>Item 1</div>
+  <div class='item'>Item 2</div>
+  <div class='item'>Item 3</div>
+</div>
       </div>
     </div>
   </div>
