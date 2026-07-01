@@ -22,6 +22,33 @@ Welcome to CSS Coffee - Your daily sip of CSS. It is a learning journey where yo
 
 ---
 
+## Local development
+
+The dev server must run on port 3000 (`npm run dev`).
+
+The **Generate Your Own Playground** section on the home page calls the
+`/api/generate-playground` route, which **proxies to the ai-blogger-agent
+generation API** (it no longer calls OpenAI directly). To use it locally:
+
+1. In the sibling `ai-blogger-agent` repo, set `OPENAI_API_KEY` in its `.env`
+   and start the generation server:
+
+   ```bash
+   cd ../ai-blogger-agent
+   npm install
+   npm run serve   # listens on http://localhost:4000
+   ```
+
+2. Run this site (`npm run dev`). It reads `AGENT_API_URL` from `.env.local`
+   (defaults to `http://localhost:4000` — see `.env.local.example`).
+
+**Production (Vercel):** set `AGENT_API_URL` to the deployed ai-blogger-agent
+Vercel URL (e.g. `https://ai-blogger-agent.vercel.app`) in the css-coffee
+Vercel project's environment variables. Set `OPENAI_API_KEY` in the
+ai-blogger-agent Vercel project's environment variables.
+
+---
+
 -   All code of website and snippets are licensed under the [MIT License](https://github.com/RanningMan/css-coffee/blob/main/license), unless explicitly stated otherwise.
 -   Logos, names and trademarks are not to be used without the explicit consent Ran Xia ([@ranningman](https://github.com/RanningMan)).
 -   This website is powered by Next.js, Vercel & GitHub.
