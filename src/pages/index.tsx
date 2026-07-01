@@ -2,6 +2,7 @@ import { GetServerSidePropsContext } from "next";
 import styles from "styles/Home.module.css";
 import ContentContainer from "components/ContentContainer/ContentContainer";
 import Hero from "components/Hero/Hero";
+import PlaygroundGenerator from "components/PlaygroundGenerator/PlaygroundGenerator";
 import { Post } from "components/components.interface";
 import Footer from "components/Footer/Footer";
 import configs from "utils/config";
@@ -41,6 +42,7 @@ export default function Home({ posts, locale }: HomeProps) {
     <>
       <main className={styles.main}>
         <Hero locale={locale} />
+        <PlaygroundGenerator locale={locale} />
         <ContentContainer posts={posts} locale={locale} />
         <Footer locale={locale} />
       </main>
