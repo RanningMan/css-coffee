@@ -11,6 +11,11 @@ const generateSitemap = (
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://csscoffee.dev/zh-CN</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
   ${posts
     .map(
       (post) => `

@@ -1,9 +1,12 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
 import Script from 'next/script';
 
-export default function Document() {
+export default function Document(props: DocumentProps) {
+	// useRouter isn't available in _document, so read the active locale off the
+	// Next data blob — otherwise zh-CN pages declare themselves as English.
+	const locale = props.__NEXT_DATA__.locale || 'en-US';
 	return (
-		<Html lang='en'>
+		<Html lang={locale}>
 			<Head>
 				<link rel='icon' href='favicon.ico' />
 				<link href='prism.css' rel='stylesheet' />
